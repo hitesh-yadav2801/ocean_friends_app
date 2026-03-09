@@ -43,3 +43,13 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Environment files — never commit secrets
+.env
+.env.*
+
+# Flutter plugin registry files (auto-generated, not needed in VCS)
+.flutter-plugins
+
+# Web build output
+/web/build/

@@ -1,1 +1,11 @@
-include: package:flutter_lints/flutter.yaml
+include: package:very_good_analysis/analysis_options.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"          # Exclude json_serializable generated files
+    - "**/*.freezed.dart"    # Exclude freezed generated files
+    - "lib/di/injection.config.dart" # Exclude injectable generated DI file
+  errors:
+    missing_required_param: error
+    missing_return: error
+
