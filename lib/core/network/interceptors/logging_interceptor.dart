@@ -1,10 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:ocean_friends_app/core/utils/app_logger.dart';
 
-/// Dio interceptor that logs every request and response in a readable format.
-///
-/// Only logs in debug mode — production builds are unaffected because the
-/// [AppLogger] level can be configured per environment.
+/// Logs outgoing requests and incoming responses for debugging.
 class LoggingInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {

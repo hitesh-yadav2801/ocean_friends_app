@@ -15,7 +15,7 @@ import 'package:ocean_friends_app/di/injection.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Register all GetIt dependencies before the widget tree starts.
+  // Initialize dependency injection.
   await configureDependencies();
 
   AppLogger.i('Dependencies configured — launching app.');
@@ -33,7 +33,7 @@ class OceanFriendsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      // Design canvas dimensions — must match [AppConstants.designWidth/Height].
+      // Design size configuration.
       designSize: const Size(
         AppConstants.designWidth,
         AppConstants.designHeight,

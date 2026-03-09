@@ -4,8 +4,7 @@ import 'package:ocean_friends_app/features/recipes/presentation/pages/recipes_pa
 
 /// Central router configuration using [GoRouter].
 ///
-/// All route definitions live here. Use [RouteNames] constants for named
-/// navigation — never pass raw strings when pushing routes.
+/// Configuration for application routing.
 final appRouter = GoRouter(
   initialLocation: RouteNames.recipes,
   debugLogDiagnostics: true,

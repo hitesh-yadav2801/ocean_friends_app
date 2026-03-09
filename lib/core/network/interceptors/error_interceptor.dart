@@ -2,10 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:ocean_friends_app/core/errors/failures.dart';
 import 'package:ocean_friends_app/core/utils/app_logger.dart';
 
-/// Dio interceptor that normalises all [DioException] errors into typed [Failure]s.
-///
-/// Attaches the resolved [Failure] to the extra map on the error so callers
-/// in data sources can extract it without re-parsing the exception.
+/// Maps [DioException] to domain-specific [Failure] types.
 class ErrorInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {

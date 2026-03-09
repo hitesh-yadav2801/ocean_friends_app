@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:get_it/get_it.dart' show GetIt;
 import 'package:ocean_friends_app/core/constants/api_constants.dart';
 import 'package:ocean_friends_app/core/network/interceptors/error_interceptor.dart';
 import 'package:ocean_friends_app/core/network/interceptors/logging_interceptor.dart';
@@ -7,7 +6,7 @@ import 'package:ocean_friends_app/core/network/interceptors/logging_interceptor.
 /// A configured [Dio] HTTP client shared across all API data sources.
 ///
 /// Sets up base URL, timeouts, headers, and attaches all interceptors.
-/// Instantiated once by [GetIt] and injected wherever needed.
+/// Shared HTTP client instance configured with interceptors and base settings.
 class DioClient {
   DioClient({LoggingInterceptor? loggingInterceptor, ErrorInterceptor? errorInterceptor})
       : _dio = _buildDio() {

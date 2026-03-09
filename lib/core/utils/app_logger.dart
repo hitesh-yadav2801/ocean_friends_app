@@ -1,9 +1,8 @@
 import 'package:logger/logger.dart';
 
-/// Application-wide structured logger.
+/// Application-wide logging utility wrapping the [Logger] package.
 ///
-/// Wraps the [Logger] package with a single shared instance.
-/// Use this instead of `print()` to get structured, level-aware console output.
+/// Provides structured, level-aware console output for all application layers.
 ///
 /// Usage:
 /// ```dart
@@ -15,7 +14,7 @@ class AppLogger {
 
   static final Logger _logger = Logger(
     printer: PrettyPrinter(
-      lineLength: 100,
+      lineLength: 80,
       dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
     ),
     level: Level.trace,
