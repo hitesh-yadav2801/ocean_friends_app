@@ -37,14 +37,12 @@ class AppLogger {
     String message, {
     Object? error,
     StackTrace? stackTrace,
-  }) =>
-      _logger.e(message, error: error, stackTrace: stackTrace);
+  }) => _logger.e(message, error: error, stackTrace: stackTrace);
 
   /// Log a fatal error that implies the app cannot continue normally.
   static void f(
     String message, {
     Object? error,
     StackTrace? stackTrace,
-  }) =>
-      _logger.f(message, error: error, stackTrace: stackTrace);
+  }) => _logger.f(message, error: error, stackTrace: stackTrace);
 }

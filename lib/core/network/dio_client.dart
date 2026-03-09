@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
+
 import 'package:ocean_friends_app/core/constants/api_constants.dart';
 import 'package:ocean_friends_app/core/network/interceptors/error_interceptor.dart';
 import 'package:ocean_friends_app/core/network/interceptors/logging_interceptor.dart';
@@ -7,9 +9,12 @@ import 'package:ocean_friends_app/core/network/interceptors/logging_interceptor.
 ///
 /// Sets up base URL, timeouts, headers, and attaches all interceptors.
 /// Shared HTTP client instance configured with interceptors and base settings.
+@lazySingleton
 class DioClient {
-  DioClient({LoggingInterceptor? loggingInterceptor, ErrorInterceptor? errorInterceptor})
-      : _dio = _buildDio() {
+  DioClient({
+    LoggingInterceptor? loggingInterceptor,
+    ErrorInterceptor? errorInterceptor,
+  }) : _dio = _buildDio() {
     _dio.interceptors.addAll([
       if (loggingInterceptor != null) loggingInterceptor,
       errorInterceptor ?? ErrorInterceptor(),
@@ -26,8 +31,12 @@ class DioClient {
     return Dio(
       BaseOptions(
         baseUrl: ApiConstants.baseUrl,
-        connectTimeout: const Duration(seconds: ApiConstants.connectTimeoutSeconds),
-        receiveTimeout: const Duration(seconds: ApiConstants.receiveTimeoutSeconds),
+        connectTimeout: const Duration(
+          seconds: ApiConstants.connectTimeoutSeconds,
+        ),
+        receiveTimeout: const Duration(
+          seconds: ApiConstants.receiveTimeoutSeconds,
+        ),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',

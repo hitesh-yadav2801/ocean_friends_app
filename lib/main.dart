@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ocean_friends_app/core/constants/app_constants.dart';
 import 'package:ocean_friends_app/core/router/app_router.dart';
 import 'package:ocean_friends_app/core/theme/app_theme.dart';
 import 'package:ocean_friends_app/core/utils/app_logger.dart';
 import 'package:ocean_friends_app/di/injection.dart';
+import 'package:ocean_friends_app/features/home/presentation/blocs/category_bloc.dart';
+import 'package:ocean_friends_app/features/search/presentation/blocs/recipe_list_bloc.dart';
 
 /// Application entry point.
 ///
@@ -42,12 +45,22 @@ class OceanFriendsApp extends StatelessWidget {
       fontSizeResolver: FontSizeResolvers.radius,
       minTextAdapt: true,
       // Builder is called once responsive context is ready.
-      builder: (_, _) {
-        return MaterialApp.router(
-          title: 'Ocean Friends — Recipes',
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.light,
-          routerConfig: appRouter,
+      builder: (_, __) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider<CategoryBloc>(
+              create: (_) => sl<CategoryBloc>(),
+            ),
+            BlocProvider<RecipeListBloc>(
+              create: (_) => sl<RecipeListBloc>(),
+            ),
+          ],
+          child: MaterialApp.router(
+            title: 'Ocean Friends — Recipes',
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.light,
+            routerConfig: appRouter,
+          ),
         );
       },
     );

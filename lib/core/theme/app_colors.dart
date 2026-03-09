@@ -53,7 +53,7 @@ abstract final class AppColors {
   // ── Dividers & outlines ────────────────────────────────────────
   static const Color divider = Color(0xFFD9D9D9); // Gray 4
   static const Color outline = Color(0xFFD9D9D9); // Gray 4
-  
+
   // ── Overlay & shadow ──────────────────────────────────────────
   static const Color scrim = Color(0x80000000);
 }

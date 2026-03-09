@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:ocean_friends_app/core/utils/app_logger.dart';
 
 /// Logs outgoing requests and incoming responses for debugging.
+@injectable
 class LoggingInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
@@ -14,7 +16,10 @@ class LoggingInterceptor extends Interceptor {
   }
 
   @override
-  void onResponse(Response<dynamic> response, ResponseInterceptorHandler handler) {
+  void onResponse(
+    Response<dynamic> response,
+    ResponseInterceptorHandler handler,
+  ) {
     AppLogger.d(
       '← [${response.statusCode}] ${response.requestOptions.uri}\n'
       '   Data: ${response.data.toString().substring(0, response.data.toString().length.clamp(0, 200))}...',

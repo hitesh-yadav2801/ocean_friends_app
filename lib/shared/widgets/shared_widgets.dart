@@ -42,7 +42,8 @@ class ShimmerCard extends StatelessWidget {
 /// Displays a message and a retry button. Pass [onRetry] to handle the tap.
 class ErrorView extends StatelessWidget {
   const ErrorView({
-    required this.message, super.key,
+    required this.message,
+    super.key,
     this.onRetry,
   });
 
