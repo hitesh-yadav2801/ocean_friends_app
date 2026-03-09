@@ -9,3 +9,9 @@ analyzer:
     missing_required_param: error
     missing_return: error
 
+linter:
+  rules:
+    # Disable overly strict/tedious formatting rules
+    public_member_api_docs: false
+    lines_longer_than_80_chars: false
+    comment_references: false

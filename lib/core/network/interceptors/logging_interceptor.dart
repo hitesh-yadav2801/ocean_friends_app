@@ -26,13 +26,13 @@ class LoggingInterceptor extends Interceptor {
   }
 
   @override
-  void onError(DioException error, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     AppLogger.e(
-      '✕ [${error.response?.statusCode}] ${error.requestOptions.uri}\n'
-      '   Message: ${error.message}',
-      error: error,
-      stackTrace: error.stackTrace,
+      '✕ [${err.response?.statusCode}] ${err.requestOptions.uri}\n'
+      '   Message: ${err.message}',
+      error: err,
+      stackTrace: err.stackTrace,
     );
-    handler.next(error);
+    handler.next(err);
   }
 }

@@ -8,13 +8,13 @@ import 'package:ocean_friends_app/core/utils/app_logger.dart';
 /// in data sources can extract it without re-parsing the exception.
 class ErrorInterceptor extends Interceptor {
   @override
-  void onError(DioException error, ErrorInterceptorHandler handler) {
-    final failure = _mapToFailure(error);
+  void onError(DioException err, ErrorInterceptorHandler handler) {
+    final failure = _mapToFailure(err);
 
     AppLogger.w('Network error mapped → ${failure.runtimeType}: ${failure.message}');
 
     // Store the typed failure so data sources can unwrap it.
-    final enrichedError = error.copyWith(
+    final enrichedError = err.copyWith(
       // ignore: avoid_dynamic_calls — dynamic extras map is Dio's convention.
       message: failure.message,
     );
