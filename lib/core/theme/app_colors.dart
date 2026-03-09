@@ -4,63 +4,56 @@ import 'package:flutter/material.dart';
 ///
 /// Define all colours here as static constants. Never use raw hex values
 /// outside this file — always reference tokens (e.g. [AppColors.primary]).
-/// Values prefixed with a comment will be updated once the Figma design is confirmed.
 abstract final class AppColors {
   // ── Primary brand palette ──────────────────────────────────────
   /// Main brand colour — used for primary buttons, active states, key accents.
-  static const Color primary = Color(0xFFFF6B35);
+  static const Color primary = Color(0xFF139D7E); // Teal from active chip
 
-  /// Lighter tint of the primary colour — used for backgrounds and chips.
-  static const Color primaryLight = Color(0xFFFFE5D9);
+  /// Lighter tint of the primary colour.
+  static const Color primaryLight = Color(0xFFD1F5EE);
 
-  /// Darker shade of the primary colour — used for pressed states.
-  static const Color primaryDark = Color(0xFFD94F1E);
+  /// Darker shade of the primary colour.
+  static const Color primaryDark = Color(0xFF0F7A62);
 
-  // ── Secondary / accent palette ─────────────────────────────────
-  /// Secondary accent — used for highlight badges and tags.
-  static const Color secondary = Color(0xFF1ABC9C);
+  // ── Secondary / Rating palette ─────────────────────────────────
+  /// Secondary colour used for rating stars.
+  static const Color rating = Color(0xFFFFAD30);
 
-  /// Light version of the secondary accent colour.
-  static const Color secondaryLight = Color(0xFFD1F5EE);
+  /// Secondary tint for rating backgrounds (Secondary 20).
+  static const Color secondary20 = Color(0xFFFFE1B3);
 
   // ── Surface & background ───────────────────────────────────────
-  /// Main background colour for pages.
-  static const Color background = Color(0xFFF8F9FA);
+  /// Main background colour.
+  static const Color background = Color(0xFFFFFFFF);
 
-  /// Surface colour for cards, bottom sheets, and elevated containers.
+  /// Surface colour.
   static const Color surface = Color(0xFFFFFFFF);
 
-  /// Background colour for input fields and subtle containers.
-  static const Color surfaceVariant = Color(0xFFF0F0F0);
+  /// Edge cases and subtle backgrounds.
+  static const Color surfaceVariant = Color(0xFFF8F9FA);
 
-  // ── Text colours ───────────────────────────────────────────────
-  /// Default text colour for body copy and titles.
-  static const Color textPrimary = Color(0xFF1A1A2E);
+  // ── Text & Label colours ───────────────────────────────────────
+  /// Primary label colour.
+  static const Color labelColor = Color(0xFF121212);
 
-  /// Secondary text colour for subtitles and meta info.
-  static const Color textSecondary = Color(0xFF6B7280);
+  /// Pure black.
+  static const Color black = Color(0xFF000000);
 
-  /// Tertiary text colour for captions and hints inside inputs.
-  static const Color textTertiary = Color(0xFFADB5BD);
+  /// Secondary text.
+  static const Color gray3 = Color(0xFFA9A9A9);
 
-  // ── Status & feedback colours ──────────────────────────────────
-  /// Colour used for error messages and destructive actions.
+  /// Tertiary text, outlines, and dividers.
+  static const Color gray4 = Color(0xFFD9D9D9);
+
+  // ── Feedback colours ───────────────────────────────────────────
   static const Color error = Color(0xFFE53E3E);
-
-  /// Colour used for success indicators and confirmations.
   static const Color success = Color(0xFF38A169);
-
-  /// Colour used for warnings and cautionary messages.
   static const Color warning = Color(0xFFDD6B20);
 
   // ── Dividers & outlines ────────────────────────────────────────
-  /// Thin separator line colour — used in lists and section dividers.
-  static const Color divider = Color(0xFFE9ECEF);
-
-  /// Border colour for input fields and outlined buttons.
-  static const Color outline = Color(0xFFCED4DA);
-
+  static const Color divider = Color(0xFFD9D9D9); // Gray 4
+  static const Color outline = Color(0xFFD9D9D9); // Gray 4
+  
   // ── Overlay & shadow ──────────────────────────────────────────
-  /// Translucent black for image overlays and scrim effects.
   static const Color scrim = Color(0x80000000);
 }

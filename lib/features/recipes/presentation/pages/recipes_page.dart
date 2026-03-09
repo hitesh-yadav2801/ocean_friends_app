@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Placeholder page for the Recipes feature.
-///
-/// This stub is here to satisfy the router during initial setup.
-/// It will be replaced with the full implementation in Phase 4.
+/// Initial route for the application.
 class RecipesPage extends StatelessWidget {
   const RecipesPage({super.key});
 

@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ocean_friends_app/core/theme/app_colors.dart';
 import 'package:ocean_friends_app/core/theme/app_text_styles.dart';
 
 /// Assembles the full [ThemeData] used by [MaterialApp.router].
 ///
 /// All colour values are sourced from [AppColors] and typography from
-/// [AppTextStyles] — never use hardcoded values here.
+/// [AppTextStyles].
 abstract final class AppTheme {
   /// Primary application theme (light mode).
   static ThemeData get light {
     return ThemeData(
       useMaterial3: true,
+      fontFamily: GoogleFonts.poppins().fontFamily,
       colorScheme: _colorScheme,
       scaffoldBackgroundColor: AppColors.background,
       appBarTheme: _appBarTheme,
@@ -36,12 +38,12 @@ abstract final class AppTheme {
     onPrimary: Colors.white,
     primaryContainer: AppColors.primaryLight,
     onPrimaryContainer: AppColors.primaryDark,
-    secondary: AppColors.secondary,
+    secondary: AppColors.rating,
     onSecondary: Colors.white,
-    secondaryContainer: AppColors.secondaryLight,
-    onSecondaryContainer: AppColors.secondary,
+    secondaryContainer: AppColors.secondary20,
+    onSecondaryContainer: AppColors.rating,
     surface: AppColors.surface,
-    onSurface: AppColors.textPrimary,
+    onSurface: AppColors.labelColor,
     error: AppColors.error,
     onError: Colors.white,
     outline: AppColors.outline,
@@ -51,7 +53,7 @@ abstract final class AppTheme {
   // ── App bar ─────────────────────────────────────────────────────
   static const AppBarTheme _appBarTheme = AppBarTheme(
     backgroundColor: AppColors.surface,
-    foregroundColor: AppColors.textPrimary,
+    foregroundColor: AppColors.labelColor,
     elevation: 0,
     scrolledUnderElevation: 1,
     centerTitle: false,
@@ -100,7 +102,7 @@ abstract final class AppTheme {
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: AppColors.error),
         ),
-        hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.textTertiary),
+        hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.gray4),
       );
 
   // ── Elevated button ─────────────────────────────────────────────

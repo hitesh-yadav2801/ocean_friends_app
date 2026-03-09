@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart' show GoRouter;
 
 /// Named route path constants used by [GoRouter].
 ///
-/// Use [RouteNames] everywhere instead of raw path strings — one source of truth.
+/// Defines constant routing paths and names for the application.
 abstract final class RouteNames {
   // ── Paths ──────────────────────────────────────────────────────
   /// Root path for the recipe browse/search screen.

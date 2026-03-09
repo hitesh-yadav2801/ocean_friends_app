@@ -4,7 +4,7 @@ import 'package:ocean_friends_app/di/injection.config.dart';
 
 /// Global [GetIt] service locator instance.
 ///
-/// Access registered dependencies anywhere via `sl<SomeClass>()`.
+/// Responsible for setting up the GetIt service locator.
 final GetIt sl = GetIt.instance;
 
 /// Registers all application dependencies.

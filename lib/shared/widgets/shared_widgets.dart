@@ -5,7 +5,7 @@ import 'package:ocean_friends_app/core/theme/app_text_styles.dart';
 
 /// A skeleton shimmer card rendered while content is loading.
 ///
-/// Replace this placeholder with the real widget once data arrives.
+
 /// Pair with [shimmer] package for the animated shine effect.
 class ShimmerCard extends StatelessWidget {
   const ShimmerCard({
@@ -63,13 +63,13 @@ class ErrorView extends StatelessWidget {
             Icon(
               Icons.wifi_off_rounded,
               size: 56.r,
-              color: AppColors.textTertiary,
+              color: AppColors.gray4,
             ),
             SizedBox(height: 16.h),
             Text(
               message,
               style: AppTextStyles.bodyMedium.copyWith(
-                color: AppColors.textSecondary,
+                color: AppColors.gray3,
               ),
               textAlign: TextAlign.center,
             ),
@@ -113,12 +113,12 @@ class EmptyView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 64.r, color: AppColors.textTertiary),
+            Icon(icon, size: 64.r, color: AppColors.gray4),
             SizedBox(height: 16.h),
             Text(
               title,
               style: AppTextStyles.titleMedium.copyWith(
-                color: AppColors.textSecondary,
+                color: AppColors.gray3,
               ),
             ),
             SizedBox(height: 8.h),

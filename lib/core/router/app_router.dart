@@ -15,6 +15,6 @@ final appRouter = GoRouter(
       name: RouteNames.recipesName,
       builder: (context, state) => const RecipesPage(),
     ),
-    // Additional routes (e.g. recipe detail) will be added in Phase 5.
+
   ],
 );
