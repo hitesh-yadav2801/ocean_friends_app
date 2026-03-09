@@ -4,67 +4,39 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.7.0
+  sdk: ^3.11.1
 
 dependencies:
   flutter:
     sdk: flutter
 
-  # --- State Management ---
-  flutter_bloc: ^9.1.1         # BLoC pattern for event-driven state management
-
-  # --- Dependency Injection ---
-  get_it: ^8.0.3               # Service locator for dependency injection
-  injectable: ^2.5.0           # Code-gen annotations for get_it
-
-  # --- Navigation ---
-  go_router: ^14.6.3           # Declarative routing with deep link support
-
-  # --- Networking ---
-  dio: ^5.8.0+1                # HTTP client with interceptor support
-
-  # --- Serialization & Functional Programming ---
-  freezed_annotation: ^3.1.0   # Immutable data classes and union types
-  json_annotation: ^4.9.0      # JSON serialization annotations
-  fpdart: ^1.1.0               # Functional programming — Either/Option types
-
-  # --- Responsive UI ---
-  flutter_screenutil: ^5.9.3   # Adaptive sizing based on design reference dimensions
-
-  # --- Images ---
-  cached_network_image: ^3.4.1 # Efficient network image loading with caching
-
-  # --- Logging ---
-  logger: ^2.5.0               # Structured, readable console logging for dev
-
-  # --- Local Storage ---
-  hive_flutter: ^1.1.0         # Lightweight NoSQL local database (favourites)
-
-  # --- Voice Search (Bonus) ---
-  speech_to_text: ^7.0.0       # Speech recognition for voice-driven search
-
-  # --- Sharing ---
-  share_plus: ^10.1.4          # Native share sheet integration
-
-  # --- Loading UX ---
-  shimmer: ^3.0.0              # Skeleton shimmer animations for loading states
+  cached_network_image: ^3.4.1
+  dio: ^5.8.0+1
+  flutter_bloc: ^9.1.1
+  flutter_screenutil: ^5.9.3
+  fpdart: ^1.1.0
+  freezed_annotation: ^3.1.0
+  get_it: ^8.0.3
+  go_router: ^14.6.3
+  hive_flutter: ^1.1.0
+  injectable: ^2.5.0
+  json_annotation: ^4.9.0
+  logger: ^2.5.0
+  share_plus: ^10.1.4
+  shimmer: ^3.0.0
+  speech_to_text: ^7.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # --- Code Generation ---
-  build_runner: ^2.4.15        # Dart build system for code generation
-  freezed: ^3.2.5              # Generates immutable classes from freezed_annotation
-  json_serializable: ^6.9.4    # Generates toJson/fromJson from json_annotation
-  injectable_generator: ^2.7.0 # Generates get_it registration code
-
-  # --- Linting ---
-  very_good_analysis: ^9.0.0   # Strict, opinionated lint rules for production quality
-
-  # --- Testing ---
-  mocktail: ^1.0.4             # Null-safe mocking without code generation
-  bloc_test: ^10.0.0           # BLoC/Cubit unit test helpers (v10 required for flutter_bloc ^9)
+  bloc_test: ^10.0.0
+  build_runner: ^2.4.15
+  freezed: ^3.2.5
+  injectable_generator: ^2.7.0
+  json_serializable: ^6.9.4
+  mocktail: ^1.0.4
+  very_good_analysis: ^9.0.0
 
 flutter:
   uses-material-design: true
