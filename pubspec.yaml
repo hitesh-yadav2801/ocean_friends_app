@@ -39,9 +39,23 @@ dev_dependencies:
   json_serializable: ^6.9.4
   mocktail: ^1.0.4
   very_good_analysis: ^9.0.0
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.0
 
 flutter:
   uses-material-design: true
   assets:
     - assets/images/
     - assets/icons/
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/app_icon.png"
+  min_sdk_android: 21
+
+flutter_native_splash:
+  color: "#129575"
+  android_12:
+    color: "#129575"
+  fullscreen: true
