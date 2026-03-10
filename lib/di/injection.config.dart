@@ -34,6 +34,8 @@ import '../features/search/domain/use_cases/filter_by_category_usecase.dart'
 import '../features/search/domain/use_cases/search_recipes_usecase.dart'
     as _i953;
 import '../features/search/presentation/blocs/recipe_list_bloc.dart' as _i264;
+import '../features/search/presentation/cubits/voice_search_cubit.dart'
+    as _i577;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -44,6 +46,7 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i299.ErrorInterceptor>(() => _i299.ErrorInterceptor());
     gh.factory<_i1048.LoggingInterceptor>(() => _i1048.LoggingInterceptor());
+    gh.factory<_i577.VoiceSearchCubit>(() => _i577.VoiceSearchCubit());
     gh.lazySingleton<_i813.UserService>(() => _i813.UserService());
     gh.lazySingleton<_i393.DioClient>(
       () => _i393.DioClient(

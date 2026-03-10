@@ -9,6 +9,7 @@ import 'package:ocean_friends_app/di/injection.dart';
 import 'package:ocean_friends_app/features/home/presentation/blocs/user_bloc.dart';
 import 'package:ocean_friends_app/features/home/presentation/blocs/category_bloc.dart';
 import 'package:ocean_friends_app/features/search/presentation/blocs/recipe_list_bloc.dart';
+import 'package:ocean_friends_app/features/search/presentation/cubits/voice_search_cubit.dart';
 
 /// Application entry point.
 ///
@@ -55,6 +56,9 @@ class OceanFriendsApp extends StatelessWidget {
             ),
             BlocProvider<UserBloc>(
               create: (_) => sl<UserBloc>(),
+            ),
+            BlocProvider<VoiceSearchCubit>(
+              create: (_) => sl<VoiceSearchCubit>(),
             ),
           ],
           child: MaterialApp.router(
