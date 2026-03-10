@@ -42,8 +42,6 @@ class OceanFriendsApp extends StatelessWidget {
         AppConstants.designWidth,
         AppConstants.designHeight,
       ),
-      // Allow text sizes to scale with user's OS font size preference.
-      fontSizeResolver: FontSizeResolvers.radius,
       minTextAdapt: true,
       // Builder is called once responsive context is ready.
       builder: (_, __) {

@@ -39,22 +39,26 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new),
+          onPressed: () => context.pop(),
+        ),
+        title: Text(
+          'Search recipes',
+          style: AppTextStyles.titleMedium.copyWith(fontSize: 18.sp),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 8.h),
-              IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new),
-                onPressed: () => context.pop(),
-              ),
-              SizedBox(height: 16.h),
-              Text(
-                'Search recipes',
-                style: AppTextStyles.headlineLarge,
-              ),
               SizedBox(height: 12.h),
               _buildSearchBar(),
               SizedBox(height: 24.h),
@@ -113,7 +117,10 @@ class _SearchPageState extends State<SearchPage> {
             padding: EdgeInsets.all(14.r),
             child: SvgPicture.asset(
               'assets/icons/search.svg',
-              colorFilter: const ColorFilter.mode(AppColors.gray4, BlendMode.srcIn),
+              colorFilter: const ColorFilter.mode(
+                AppColors.gray4,
+                BlendMode.srcIn,
+              ),
             ),
           ),
           filled: true,

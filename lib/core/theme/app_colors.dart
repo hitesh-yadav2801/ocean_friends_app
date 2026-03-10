@@ -7,9 +7,7 @@ import 'package:flutter/material.dart';
 abstract final class AppColors {
   // ── Primary brand palette ──────────────────────────────────────
   /// Main brand colour — used for primary buttons, active states, key accents.
-  static const Color primary = Color(
-    0xFF129575,
-  ); // Updated to match Figma design
+  static const Color primary = Color(0xFF129575);
 
   /// Lighter tint of the primary colour.
   static const Color primaryLight = Color(0xFFD1F5EE);

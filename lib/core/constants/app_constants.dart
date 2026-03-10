@@ -8,11 +8,11 @@ class AppConstants {
 
   // ── Design reference dimensions (for flutter_screenutil) ───────
 
-  /// Reference device width used during UI design (iPhone 14 Pro = 393 logical pixels).
-  static const double designWidth = 393;
+  /// Reference device width used during UI design
+  static const double designWidth = 375;
 
-  /// Reference device height used during UI design (iPhone 14 Pro = 852 logical pixels).
-  static const double designHeight = 852;
+  /// Reference device height used during UI design
+  static const double designHeight = 812;
 
   // ── Pagination ─────────────────────────────────────────────────
 

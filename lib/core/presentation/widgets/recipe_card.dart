@@ -81,7 +81,7 @@ class RecipeCard extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: AppTextStyles.bodySmall.copyWith(
-                          color: Colors.white.withValues(alpha: 0.8),
+                          color: AppColors.gray3,
                         ),
                       ),
                     ],
