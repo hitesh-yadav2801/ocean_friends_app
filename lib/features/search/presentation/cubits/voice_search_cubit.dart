@@ -14,6 +14,7 @@ class VoiceSearchCubit extends Cubit<VoiceSearchState> {
 
   final stt.SpeechToText _speech = stt.SpeechToText();
   bool _isInitialised = false;
+  bool _hasFinalResult = false;
 
   /// Starts listening for user speech.
   ///
@@ -51,10 +52,12 @@ class VoiceSearchCubit extends Cubit<VoiceSearchState> {
       }
 
       emit(const VoiceSearchState.listening());
+      _hasFinalResult = false;
 
       await _speech.listen(
         onResult: (result) {
           if (result.finalResult) {
+            _hasFinalResult = true;
             final text = result.recognizedWords.trim();
             if (text.isEmpty) {
               emit(
@@ -95,7 +98,13 @@ class VoiceSearchCubit extends Cubit<VoiceSearchState> {
   }
 
   void _onListeningFinished() {
-    // Only reset if we're still in listening state without a final result.
+    // If a final result was already delivered via onResult, do nothing —
+    // the onStatus callback can arrive before or after onResult on both
+    // iOS and Android, so we must not override the done/error state that
+    // onResult already emitted.
+    if (_hasFinalResult) return;
+
+    // Only act if we're still waiting in the listening state.
     state.whenOrNull(
       listening: (partialText) {
         if (partialText.trim().isNotEmpty) {
