@@ -1,14 +1,22 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:ocean_friends_app/core/errors/failures.dart';
 import 'package:ocean_friends_app/core/utils/app_logger.dart';
 
-/// Maps [DioException] to domain-specific [Failure] types.
+/// Intercepts Dio exceptions and normalises them (or logs them)
+/// before they reach the Repository layer.
+///
+/// This helps centralise things like logging HTTP status codes or
+/// renewing auth tokens if we had authentication.
+@injectable
 class ErrorInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     final failure = _mapToFailure(err);
 
-    AppLogger.w('Network error mapped → ${failure.runtimeType}: ${failure.message}');
+    AppLogger.w(
+      'Network error mapped → ${failure.runtimeType}: ${failure.message}',
+    );
 
     // Store the typed failure so data sources can unwrap it.
     final enrichedError = err.copyWith(
