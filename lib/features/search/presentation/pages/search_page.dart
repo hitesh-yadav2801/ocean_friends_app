@@ -67,7 +67,9 @@ class _SearchPageState extends State<SearchPage> {
                 children: [
                   Text(
                     'Search Result',
-                    style: AppTextStyles.titleLarge,
+                    style: AppTextStyles.titleLarge.copyWith(
+                      fontSize: 16.sp,
+                    ),
                   ),
                   BlocBuilder<RecipeListBloc, RecipeListState>(
                     builder: (context, state) {

@@ -112,7 +112,10 @@ class _HomePageState extends State<HomePage> {
                   else
                     Text(
                       'Hello $name',
-                      style: AppTextStyles.headlineLarge,
+                      style: AppTextStyles.headlineLarge.copyWith(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   SizedBox(height: 6.h),
                   Text(
@@ -120,6 +123,7 @@ class _HomePageState extends State<HomePage> {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: AppTextStyles.bodyMedium.copyWith(
+                      fontSize: 11.sp,
                       color: AppColors.gray3,
                     ),
                   ),
@@ -140,10 +144,11 @@ class _HomePageState extends State<HomePage> {
                     ? Image.network(
                         avatarUrl,
                         fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) => SvgPicture.asset(
-                          'assets/icons/avatar.svg',
-                          fit: BoxFit.cover,
-                        ),
+                        errorBuilder: (context, error, stackTrace) =>
+                            SvgPicture.asset(
+                              'assets/icons/avatar.svg',
+                              fit: BoxFit.cover,
+                            ),
                       )
                     : SvgPicture.asset(
                         'assets/icons/avatar.svg',
@@ -177,7 +182,10 @@ class _HomePageState extends State<HomePage> {
           children: [
             SvgPicture.asset(
               'assets/icons/search.svg',
-              colorFilter: const ColorFilter.mode(AppColors.gray4, BlendMode.srcIn),
+              colorFilter: const ColorFilter.mode(
+                AppColors.gray4,
+                BlendMode.srcIn,
+              ),
               width: 18.sp,
             ),
             SizedBox(width: 12.w),
