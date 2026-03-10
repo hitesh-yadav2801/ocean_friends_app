@@ -53,6 +53,10 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>This app uses speech recognition to search for recipes by voice.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app needs microphone access to listen to your voice for recipe search.</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
