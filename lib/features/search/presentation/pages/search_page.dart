@@ -30,7 +30,6 @@ class _SearchPageState extends State<SearchPage> {
 
   void _onSearchRefreshed(String query) {
     final trimmedQuery = query.trim();
-    if (trimmedQuery.isEmpty) return;
     setState(() {
       _currentQuery = trimmedQuery;
     });

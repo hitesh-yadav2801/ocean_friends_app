@@ -1,10 +1,17 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:injectable/injectable.dart';
 
+@lazySingleton
 class UserService {
-  Future<Map<String, String>> getRandomUser() async {
+  /// Fetches a random user profile.
+  /// Returns a map with 'name' and 'avatar' or null if the request fails.
+  Future<Map<String, String>?> getRandomUser() async {
     try {
-      final response = await http.get(Uri.parse('https://randomuser.me/api/'));
+      final response = await http
+          .get(Uri.parse('https://randomuser.me/api/'))
+          .timeout(const Duration(seconds: 10));
+
       if (response.statusCode == 200) {
         final data = json.decode(response.body) as Map<String, dynamic>;
         final results = data['results'] as List<dynamic>;
@@ -19,12 +26,10 @@ class UserService {
           };
         }
       }
-    } on Exception catch (_) {
-      // Fallback
+      return null;
+    } catch (e) {
+      // Log error in a real app
+      return null;
     }
-    return {
-      'name': 'Jay',
-      'avatar': 'https://i.pravatar.cc/150?img=68',
-    };
   }
 }

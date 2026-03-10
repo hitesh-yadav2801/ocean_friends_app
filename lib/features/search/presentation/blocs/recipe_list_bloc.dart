@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:ocean_friends_app/core/errors/failures.dart';
 
 import 'package:ocean_friends_app/features/search/domain/use_cases/filter_by_category_usecase.dart';
 import 'package:ocean_friends_app/features/search/domain/use_cases/search_recipes_usecase.dart';
@@ -29,7 +30,13 @@ class RecipeListBloc extends Bloc<RecipeListEvent, RecipeListState> {
       FilterByCategoryParams(event.category),
     );
     result.fold(
-      (failure) => emit(RecipeListState.error(failure)),
+      (failure) {
+        if (failure is EmptyResultFailure) {
+          emit(const RecipeListState.loaded([]));
+        } else {
+          emit(RecipeListState.error(failure));
+        }
+      },
       (recipes) => emit(RecipeListState.loaded(recipes)),
     );
   }
@@ -43,7 +50,13 @@ class RecipeListBloc extends Bloc<RecipeListEvent, RecipeListState> {
       const SearchRecipesParams(''),
     );
     result.fold(
-      (failure) => emit(RecipeListState.error(failure)),
+      (failure) {
+        if (failure is EmptyResultFailure) {
+          emit(const RecipeListState.loaded([]));
+        } else {
+          emit(RecipeListState.error(failure));
+        }
+      },
       (recipes) => emit(RecipeListState.loaded(recipes)),
     );
   }
@@ -63,7 +76,13 @@ class RecipeListBloc extends Bloc<RecipeListEvent, RecipeListState> {
       SearchRecipesParams(event.query),
     );
     result.fold(
-      (failure) => emit(RecipeListState.error(failure)),
+      (failure) {
+        if (failure is EmptyResultFailure) {
+          emit(const RecipeListState.loaded([]));
+        } else {
+          emit(RecipeListState.error(failure));
+        }
+      },
       (recipes) => emit(RecipeListState.loaded(recipes)),
     );
   }

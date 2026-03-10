@@ -19,9 +19,11 @@ import '../features/home/data/datasources/category_remote_datasource.dart'
     as _i902;
 import '../features/home/data/repositories/category_repository_impl.dart'
     as _i106;
+import '../features/home/data/services/user_service.dart' as _i813;
 import '../features/home/domain/repositories/category_repository.dart' as _i236;
 import '../features/home/domain/use_cases/get_categories_usecase.dart' as _i807;
 import '../features/home/presentation/blocs/category_bloc.dart' as _i479;
+import '../features/home/presentation/blocs/user_bloc.dart' as _i731;
 import '../features/search/data/datasources/recipe_remote_datasource.dart'
     as _i56;
 import '../features/search/data/repositories/recipe_repository_impl.dart'
@@ -42,12 +44,14 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i299.ErrorInterceptor>(() => _i299.ErrorInterceptor());
     gh.factory<_i1048.LoggingInterceptor>(() => _i1048.LoggingInterceptor());
+    gh.lazySingleton<_i813.UserService>(() => _i813.UserService());
     gh.lazySingleton<_i393.DioClient>(
       () => _i393.DioClient(
         loggingInterceptor: gh<_i1048.LoggingInterceptor>(),
         errorInterceptor: gh<_i299.ErrorInterceptor>(),
       ),
     );
+    gh.factory<_i731.UserBloc>(() => _i731.UserBloc(gh<_i813.UserService>()));
     gh.lazySingleton<_i56.RecipeRemoteDataSource>(
       () => _i56.RecipeRemoteDataSourceImpl(gh<_i393.DioClient>()),
     );
