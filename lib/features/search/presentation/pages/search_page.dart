@@ -29,11 +29,12 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void _onSearchRefreshed(String query) {
-    if (query.trim().isEmpty) return;
+    final trimmedQuery = query.trim();
+    if (trimmedQuery.isEmpty) return;
     setState(() {
-      _currentQuery = query;
+      _currentQuery = trimmedQuery;
     });
-    context.read<RecipeListBloc>().add(SearchRecipes(query));
+    context.read<RecipeListBloc>().add(SearchRecipes(trimmedQuery));
   }
 
   @override
@@ -67,6 +68,7 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                   BlocBuilder<RecipeListBloc, RecipeListState>(
                     builder: (context, state) {
+                      if (_currentQuery.isEmpty) return const SizedBox.shrink();
                       return state.maybeWhen(
                         loaded: (recipes) => Text(
                           '${recipes.length} results',
@@ -138,15 +140,14 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Widget _buildSearchResults() {
+    if (_currentQuery.isEmpty) {
+      return _buildInitialState();
+    }
+
     return BlocBuilder<RecipeListBloc, RecipeListState>(
       builder: (context, state) {
         return state.when(
-          initial: () => Center(
-            child: Text(
-              'Type to search for recipes',
-              style: AppTextStyles.bodyLarge.copyWith(color: AppColors.gray3),
-            ),
-          ),
+          initial: _buildInitialState,
           loading: () => GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -204,6 +205,15 @@ class _SearchPageState extends State<SearchPage> {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildInitialState() {
+    return Center(
+      child: Text(
+        'Type to search for recipes',
+        style: AppTextStyles.bodyLarge.copyWith(color: AppColors.gray3),
+      ),
     );
   }
 }
