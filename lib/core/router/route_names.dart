@@ -6,7 +6,10 @@ import 'package:go_router/go_router.dart' show GoRouter;
 abstract final class RouteNames {
   // ── Paths ──────────────────────────────────────────────────────
   /// Root path for the home screen.
-  static const String home = '/';
+  static const String home = '/home';
+
+  /// Path for the splash screen.
+  static const String splash = '/';
 
   /// Path for the search screen.
   static const String search = '/search';
