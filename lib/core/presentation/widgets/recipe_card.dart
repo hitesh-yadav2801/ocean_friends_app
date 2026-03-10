@@ -34,11 +34,11 @@ class RecipeCard extends StatelessWidget {
                   child: CachedNetworkImage(
                     imageUrl: recipe.strMealThumb,
                     fit: BoxFit.cover,
-                    placeholder: (context, url) => AnimatedShimmer(
+                    placeholder: (context, url) => const AnimatedShimmer(
                       height: double.infinity,
                       width: double.infinity,
                     ),
-                    errorWidget: (context, url, error) => Container(
+                    errorWidget: (context, url, error) => ColoredBox(
                       color: AppColors.error.withValues(alpha: 0.1),
                       child: const Icon(Icons.error_outline),
                     ),
@@ -58,7 +58,7 @@ class RecipeCard extends StatelessWidget {
                       end: Alignment.topCenter,
                       colors: [
                         Colors.black.withValues(alpha: 0.7),
-                        Colors.black.withValues(alpha: 0.0),
+                        Colors.black.withValues(alpha: 0),
                       ],
                     ),
                   ),
@@ -90,28 +90,29 @@ class RecipeCard extends StatelessWidget {
               ),
               // Rating pill at top-right
               Positioned(
-                top: 8.h,
-                right: 8.w,
+                top: 10.h,
+                right: 10.w,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                   decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.9),
-                    borderRadius: BorderRadius.circular(12.r),
+                    color: AppColors.secondary20,
+                    borderRadius: BorderRadius.circular(20.r),
                   ),
                   child: Row(
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.star,
                         size: 12.sp,
-                        color: Colors.amber,
+                        color: AppColors.rating,
                       ),
-                      SizedBox(width: 4.w),
+                      SizedBox(width: 3.w),
                       Text(
-                        '4.0', // Static rating to align with design
+                        '4.0',
                         style: AppTextStyles.bodySmall.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.labelColor,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.black,
                         ),
                       ),
                     ],

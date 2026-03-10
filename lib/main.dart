@@ -6,6 +6,8 @@ import 'package:ocean_friends_app/core/router/app_router.dart';
 import 'package:ocean_friends_app/core/theme/app_theme.dart';
 import 'package:ocean_friends_app/core/utils/app_logger.dart';
 import 'package:ocean_friends_app/di/injection.dart';
+import 'package:ocean_friends_app/features/home/data/services/user_service.dart';
+import 'package:ocean_friends_app/features/home/presentation/blocs/user_bloc.dart';
 import 'package:ocean_friends_app/features/home/presentation/blocs/category_bloc.dart';
 import 'package:ocean_friends_app/features/search/presentation/blocs/recipe_list_bloc.dart';
 
@@ -53,6 +55,9 @@ class OceanFriendsApp extends StatelessWidget {
             ),
             BlocProvider<RecipeListBloc>(
               create: (_) => sl<RecipeListBloc>(),
+            ),
+            BlocProvider<UserBloc>(
+              create: (_) => UserBloc(UserService()),
             ),
           ],
           child: MaterialApp.router(

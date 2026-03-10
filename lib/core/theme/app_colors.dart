@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 abstract final class AppColors {
   // ── Primary brand palette ──────────────────────────────────────
   /// Main brand colour — used for primary buttons, active states, key accents.
-  static const Color primary = Color(0xFF139D7E); // Teal from active chip
+  static const Color primary = Color(
+    0xFF129575,
+  ); // Updated to match Figma design
 
   /// Lighter tint of the primary colour.
   static const Color primaryLight = Color(0xFFD1F5EE);
@@ -15,12 +17,16 @@ abstract final class AppColors {
   /// Darker shade of the primary colour.
   static const Color primaryDark = Color(0xFF0F7A62);
 
+  static const Color primary80 = Color(0xFF71B1A1);
+
   // ── Secondary / Rating palette ─────────────────────────────────
   /// Secondary colour used for rating stars.
   static const Color rating = Color(0xFFFFAD30);
 
   /// Secondary tint for rating backgrounds (Secondary 20).
   static const Color secondary20 = Color(0xFFFFE1B3);
+
+  static const Color secondary40 = Color(0xFFFFCE80);
 
   // ── Surface & background ───────────────────────────────────────
   /// Main background colour.

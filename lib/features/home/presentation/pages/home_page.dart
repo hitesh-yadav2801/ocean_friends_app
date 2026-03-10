@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ocean_friends_app/core/presentation/widgets/animated_shimmer.dart';
 import 'package:ocean_friends_app/core/presentation/widgets/category_chip.dart';
@@ -10,6 +11,9 @@ import 'package:ocean_friends_app/core/theme/app_text_styles.dart';
 import 'package:ocean_friends_app/features/home/presentation/blocs/category_bloc.dart';
 import 'package:ocean_friends_app/features/home/presentation/blocs/category_event.dart';
 import 'package:ocean_friends_app/features/home/presentation/blocs/category_state.dart';
+import 'package:ocean_friends_app/features/home/presentation/blocs/user_bloc.dart';
+import 'package:ocean_friends_app/features/home/presentation/blocs/user_event.dart';
+import 'package:ocean_friends_app/features/home/presentation/blocs/user_state.dart';
 import 'package:ocean_friends_app/features/search/presentation/blocs/recipe_list_bloc.dart';
 import 'package:ocean_friends_app/features/search/presentation/blocs/recipe_list_event.dart';
 import 'package:ocean_friends_app/features/search/presentation/blocs/recipe_list_state.dart';
@@ -23,11 +27,23 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String? _selectedCategoryId;
+  late final String _randomSubtitle;
+
+  static const _subtitles = [
+    'What are you having today?',
+    'Discover your next favorite meal',
+    'Time to cook something delicious!',
+    'Let\'s find the perfect recipe for you',
+    'Ready to try something new and tasty?',
+    'Hungry for adventure? Pick a dish!',
+  ];
 
   @override
   void initState() {
     super.initState();
+    _randomSubtitle = (List<String>.from(_subtitles)..shuffle()).first;
     context.read<CategoryBloc>().add(const FetchCategories());
+    context.read<UserBloc>().add(FetchUserProfile());
   }
 
   void _onCategorySelected(String categoryId, String categoryName) {
@@ -36,7 +52,11 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _selectedCategoryId = categoryId;
     });
-    context.read<RecipeListBloc>().add(FetchRecipesByCategory(categoryName));
+    if (categoryId == 'all') {
+      context.read<RecipeListBloc>().add(const FetchAllRecipes());
+    } else {
+      context.read<RecipeListBloc>().add(FetchRecipesByCategory(categoryName));
+    }
   }
 
   @override
@@ -49,11 +69,11 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildHeader(context),
-              SizedBox(height: 20.h),
+              SizedBox(height: 30.h),
               _buildSearchBar(context),
-              SizedBox(height: 24.h),
+              SizedBox(height: 26.h),
               _buildCategories(),
-              SizedBox(height: 16.h),
+              SizedBox(height: 24.h),
               _buildRecipes(),
             ],
           ),
@@ -63,33 +83,77 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildHeader(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        var name = 'Jay';
+        String? avatarUrl;
+
+        if (state is UserLoaded) {
+          name = state.name;
+          avatarUrl = state.avatarUrl;
+        }
+
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'Hello Jay',
-              style: AppTextStyles.headlineLarge,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (state is UserLoading)
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 4.h),
+                      child: AnimatedShimmer(
+                        width: 120.w,
+                        height: 24.h,
+                        borderRadius: 4.r,
+                      ),
+                    )
+                  else
+                    Text(
+                      'Hello $name',
+                      style: AppTextStyles.headlineLarge,
+                    ),
+                  SizedBox(height: 6.h),
+                  Text(
+                    _randomSubtitle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTextStyles.bodyMedium.copyWith(
+                      color: AppColors.gray3,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: 6.h),
-            Text(
-              'What are you having today?',
-              style: AppTextStyles.bodyMedium.copyWith(
-                color: AppColors.gray3,
+            SizedBox(width: 12.w),
+            Container(
+              width: 40.r,
+              height: 40.r,
+              decoration: BoxDecoration(
+                color: AppColors.secondary40,
+                borderRadius: BorderRadius.circular(10.r),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.r),
+                child: avatarUrl != null
+                    ? Image.network(
+                        avatarUrl,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => SvgPicture.asset(
+                          'assets/icons/avatar.svg',
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    : SvgPicture.asset(
+                        'assets/icons/avatar.svg',
+                        fit: BoxFit.cover,
+                      ),
               ),
             ),
           ],
-        ),
-        CircleAvatar(
-          radius: 24.r,
-          backgroundColor: AppColors.primaryLight,
-          backgroundImage: const NetworkImage(
-            'https://i.pravatar.cc/150?img=68',
-          ),
-        ),
-      ],
+        );
+      },
     );
   }
 
@@ -99,19 +163,30 @@ class _HomePageState extends State<HomePage> {
         context.push('/search');
       },
       child: Container(
-        height: 52.h,
+        height: 48.h,
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         decoration: BoxDecoration(
-          color: AppColors.surfaceVariant,
-          borderRadius: BorderRadius.circular(12.r),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.r),
+          border: Border.all(
+            color: AppColors.gray4,
+            width: 1.3,
+          ),
         ),
         child: Row(
           children: [
-            Icon(Icons.search, color: AppColors.gray4, size: 20.sp),
+            SvgPicture.asset(
+              'assets/icons/search.svg',
+              colorFilter: const ColorFilter.mode(AppColors.gray4, BlendMode.srcIn),
+              width: 18.sp,
+            ),
             SizedBox(width: 12.w),
             Text(
-              'Search recipes...',
-              style: AppTextStyles.bodyMedium.copyWith(color: AppColors.gray4),
+              'Search',
+              style: AppTextStyles.labelSmall.copyWith(
+                fontSize: 11.sp,
+                color: AppColors.gray4,
+              ),
             ),
           ],
         ),
@@ -125,10 +200,7 @@ class _HomePageState extends State<HomePage> {
         state.maybeWhen(
           loaded: (categories) {
             if (categories.isNotEmpty && _selectedCategoryId == null) {
-              _onCategorySelected(
-                categories.first.idCategory,
-                categories.first.strCategory,
-              );
+              _onCategorySelected('all', 'All');
             }
           },
           orElse: () {},
@@ -142,8 +214,8 @@ class _HomePageState extends State<HomePage> {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: 5,
-              separatorBuilder: (_, _) => SizedBox(width: 8.w),
-              itemBuilder: (_, _) => AnimatedShimmer(
+              separatorBuilder: (context, index) => SizedBox(width: 8.w),
+              itemBuilder: (context, index) => AnimatedShimmer(
                 width: 100.w,
                 height: 40.h,
                 borderRadius: 20.r,
@@ -155,15 +227,20 @@ class _HomePageState extends State<HomePage> {
               height: 40.h,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                itemCount: categories.length,
+                itemCount: categories.length + 1,
                 clipBehavior: Clip.none,
-                separatorBuilder: (_, _) => SizedBox(width: 12.w),
+                separatorBuilder: (context, index) => SizedBox(width: 12.w),
                 itemBuilder: (context, index) {
-                  final category = categories[index];
-                  // If no selection yet, treat first as selected in UI (already firing event)
-                  final isSelected =
-                      _selectedCategoryId == category.idCategory ||
-                      (_selectedCategoryId == null && index == 0);
+                  if (index == 0) {
+                    final isSelected = _selectedCategoryId == 'all';
+                    return CategoryChip(
+                      label: 'All',
+                      isSelected: isSelected,
+                      onTap: () => _onCategorySelected('all', 'All'),
+                    );
+                  }
+                  final category = categories[index - 1];
+                  final isSelected = _selectedCategoryId == category.idCategory;
                   return CategoryChip(
                     label: category.strCategory,
                     isSelected: isSelected,
@@ -195,14 +272,14 @@ class _HomePageState extends State<HomePage> {
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              childAspectRatio: 0.75,
               crossAxisSpacing: 16.w,
               mainAxisSpacing: 16.h,
             ),
             itemCount: 4,
-            itemBuilder: (_, _) => AnimatedShimmer(
-              height: 200.h,
-              borderRadius: 16.r,
+            itemBuilder: (context, index) => AnimatedShimmer(
+              height: 150.h,
+              width: 150.w,
+              borderRadius: 10.r,
             ),
           ),
           loaded: (recipes) {
@@ -224,7 +301,6 @@ class _HomePageState extends State<HomePage> {
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 1,
                 crossAxisSpacing: 16.w,
                 mainAxisSpacing: 16.h,
               ),

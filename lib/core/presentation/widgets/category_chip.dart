@@ -21,17 +21,19 @@ class CategoryChip extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 8.h),
-        margin: EdgeInsets.only(right: 8.w),
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
+        margin: EdgeInsets.only(right: 12.w),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primary : Colors.transparent,
-          borderRadius: BorderRadius.circular(20.r),
+          color: isSelected ? AppColors.primary : Colors.white,
+          borderRadius: BorderRadius.circular(10.r),
         ),
         child: Text(
           label,
-          style: AppTextStyles.bodyMedium.copyWith(
-            color: isSelected ? Colors.white : AppColors.gray3,
-            fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+          style: AppTextStyles.labelSmall.copyWith(
+            color: isSelected ? Colors.white : AppColors.primary80,
+            fontSize: 11.sp,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),

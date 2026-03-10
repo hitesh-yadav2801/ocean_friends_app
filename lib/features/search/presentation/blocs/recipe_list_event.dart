@@ -16,6 +16,10 @@ class FetchRecipesByCategory extends RecipeListEvent {
   List<Object?> get props => [category];
 }
 
+class FetchAllRecipes extends RecipeListEvent {
+  const FetchAllRecipes();
+}
+
 class SearchRecipes extends RecipeListEvent {
   const SearchRecipes(this.query);
 

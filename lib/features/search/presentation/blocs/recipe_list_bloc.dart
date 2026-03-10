@@ -13,6 +13,7 @@ class RecipeListBloc extends Bloc<RecipeListEvent, RecipeListState> {
     this._searchRecipesUseCase,
   ) : super(const RecipeListState.initial()) {
     on<FetchRecipesByCategory>(_onFetchRecipesByCategory);
+    on<FetchAllRecipes>(_onFetchAllRecipes);
     on<SearchRecipes>(_onSearchRecipes);
   }
 
@@ -26,6 +27,20 @@ class RecipeListBloc extends Bloc<RecipeListEvent, RecipeListState> {
     emit(const RecipeListState.loading());
     final result = await _filterByCategoryUseCase(
       FilterByCategoryParams(event.category),
+    );
+    result.fold(
+      (failure) => emit(RecipeListState.error(failure)),
+      (recipes) => emit(RecipeListState.loaded(recipes)),
+    );
+  }
+
+  Future<void> _onFetchAllRecipes(
+    FetchAllRecipes event,
+    Emitter<RecipeListState> emit,
+  ) async {
+    emit(const RecipeListState.loading());
+    final result = await _searchRecipesUseCase(
+      const SearchRecipesParams(''),
     );
     result.fold(
       (failure) => emit(RecipeListState.error(failure)),

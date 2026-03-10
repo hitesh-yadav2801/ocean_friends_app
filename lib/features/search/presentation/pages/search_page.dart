@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ocean_friends_app/core/presentation/widgets/animated_shimmer.dart';
 import 'package:ocean_friends_app/core/presentation/widgets/recipe_card.dart';
@@ -91,13 +92,47 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Widget _buildSearchBar() {
-    return TextField(
-      controller: _searchController,
-      textInputAction: TextInputAction.search,
-      onSubmitted: _onSearchRefreshed,
-      decoration: InputDecoration(
-        hintText: 'Search',
-        prefixIcon: Icon(Icons.search, color: AppColors.gray4, size: 20.sp),
+    return SizedBox(
+      height: 48.h,
+      child: TextField(
+        controller: _searchController,
+        textInputAction: TextInputAction.search,
+        onSubmitted: _onSearchRefreshed,
+        style: AppTextStyles.labelSmall.copyWith(
+          fontSize: 11.sp,
+          color: AppColors.labelColor,
+        ),
+        decoration: InputDecoration(
+          hintText: 'Search',
+          hintStyle: AppTextStyles.labelSmall.copyWith(
+            fontSize: 11.sp,
+            color: AppColors.gray4,
+          ),
+          prefixIcon: Padding(
+            padding: EdgeInsets.all(14.r),
+            child: SvgPicture.asset(
+              'assets/icons/search.svg',
+              colorFilter: const ColorFilter.mode(AppColors.gray4, BlendMode.srcIn),
+            ),
+          ),
+          filled: true,
+          fillColor: Colors.white,
+          contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.r),
+            borderSide: const BorderSide(
+              color: AppColors.gray4,
+              width: 1.3,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.r),
+            borderSide: const BorderSide(
+              color: AppColors.primary,
+              width: 1.3,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -115,14 +150,14 @@ class _SearchPageState extends State<SearchPage> {
           loading: () => GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              childAspectRatio: 1,
               crossAxisSpacing: 16.w,
               mainAxisSpacing: 16.h,
             ),
             itemCount: 6,
-            itemBuilder: (_, _) => AnimatedShimmer(
-              height: 200.h,
-              borderRadius: 16.r,
+            itemBuilder: (context, index) => AnimatedShimmer(
+              height: 150.h,
+              width: 150.w,
+              borderRadius: 10.r,
             ),
           ),
           loaded: (recipes) {
@@ -147,7 +182,6 @@ class _SearchPageState extends State<SearchPage> {
             return GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 1,
                 crossAxisSpacing: 16.w,
                 mainAxisSpacing: 16.h,
               ),
