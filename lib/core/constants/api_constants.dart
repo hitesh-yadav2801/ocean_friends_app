@@ -1,4 +1,4 @@
-/// All API-related constants for MealDB integration.
+/// All API-related constants used across the application.
 ///
 /// Centralises base URL and endpoint paths so they can be updated in one place.
 library;
@@ -29,6 +29,9 @@ class ApiConstants {
 
   /// Returns a single random meal.
   static const String randomMeal = '/random.php';
+
+  /// Fruityvice endpoint that returns all available fruits.
+  static const String fruitAll = 'https://www.fruityvice.com/api/fruit/all';
 
   // ── Network timeouts ───────────────────────────────────────────
 

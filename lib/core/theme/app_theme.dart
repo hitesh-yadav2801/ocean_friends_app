@@ -21,6 +21,7 @@ abstract final class AppTheme {
       inputDecorationTheme: _inputDecorationTheme,
       elevatedButtonTheme: _elevatedButtonTheme,
       outlinedButtonTheme: _outlinedButtonTheme,
+      navigationBarTheme: _navigationBarTheme,
       cardTheme: _cardTheme,
       chipTheme: _chipTheme,
       dividerTheme: const DividerThemeData(
@@ -132,6 +133,32 @@ abstract final class AppTheme {
           ),
           textStyle: AppTextStyles.labelLarge,
         ),
+      );
+
+  // ── Navigation bar ─────────────────────────────────────────────
+  static NavigationBarThemeData get _navigationBarTheme =>
+      NavigationBarThemeData(
+        backgroundColor: AppColors.surface,
+        indicatorColor: AppColors.primaryLight,
+        labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>((states) {
+          if (states.contains(WidgetState.selected)) {
+            return AppTextStyles.labelSmall.copyWith(
+              color: AppColors.primary,
+              fontWeight: FontWeight.w600,
+            );
+          }
+
+          return AppTextStyles.labelSmall.copyWith(
+            color: AppColors.gray3,
+          );
+        }),
+        iconTheme: WidgetStateProperty.resolveWith<IconThemeData>((states) {
+          if (states.contains(WidgetState.selected)) {
+            return const IconThemeData(color: AppColors.primary);
+          }
+
+          return const IconThemeData(color: AppColors.gray3);
+        }),
       );
 
   // ── Card ────────────────────────────────────────────────────────
