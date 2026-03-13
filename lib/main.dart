@@ -6,8 +6,9 @@ import 'package:ocean_friends_app/core/router/app_router.dart';
 import 'package:ocean_friends_app/core/theme/app_theme.dart';
 import 'package:ocean_friends_app/core/utils/app_logger.dart';
 import 'package:ocean_friends_app/di/injection.dart';
-import 'package:ocean_friends_app/features/home/presentation/blocs/user_bloc.dart';
 import 'package:ocean_friends_app/features/home/presentation/blocs/category_bloc.dart';
+import 'package:ocean_friends_app/features/home/presentation/blocs/user_bloc.dart';
+import 'package:ocean_friends_app/features/nutrition/presentation/cubits/nutrition_tracker_cubit.dart';
 import 'package:ocean_friends_app/features/search/presentation/blocs/recipe_list_bloc.dart';
 import 'package:ocean_friends_app/features/search/presentation/cubits/voice_search_cubit.dart';
 
@@ -45,7 +46,7 @@ class OceanFriendsApp extends StatelessWidget {
       ),
       minTextAdapt: true,
       // Builder is called once responsive context is ready.
-      builder: (_, __) {
+      builder: (context, child) {
         return MultiBlocProvider(
           providers: [
             BlocProvider<CategoryBloc>(
@@ -60,9 +61,12 @@ class OceanFriendsApp extends StatelessWidget {
             BlocProvider<VoiceSearchCubit>(
               create: (_) => sl<VoiceSearchCubit>(),
             ),
+            BlocProvider<NutritionTrackerCubit>(
+              create: (_) => sl<NutritionTrackerCubit>()..loadFruits(),
+            ),
           ],
           child: MaterialApp.router(
-            title: 'Ocean Friends — Recipes',
+            title: 'Ocean Friends',
             debugShowCheckedModeBanner: false,
             theme: AppTheme.light,
             routerConfig: appRouter,

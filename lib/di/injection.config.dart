@@ -24,6 +24,16 @@ import '../features/home/domain/repositories/category_repository.dart' as _i236;
 import '../features/home/domain/use_cases/get_categories_usecase.dart' as _i807;
 import '../features/home/presentation/blocs/category_bloc.dart' as _i479;
 import '../features/home/presentation/blocs/user_bloc.dart' as _i731;
+import '../features/nutrition/data/datasources/fruit_remote_datasource.dart'
+    as _i392;
+import '../features/nutrition/data/repositories/fruit_repository_impl.dart'
+    as _i618;
+import '../features/nutrition/domain/repositories/fruit_repository.dart'
+    as _i874;
+import '../features/nutrition/domain/use_cases/get_all_fruits_usecase.dart'
+    as _i698;
+import '../features/nutrition/presentation/cubits/nutrition_tracker_cubit.dart'
+    as _i143;
 import '../features/search/data/datasources/recipe_remote_datasource.dart'
     as _i56;
 import '../features/search/data/repositories/recipe_repository_impl.dart'
@@ -54,12 +64,18 @@ extension GetItInjectableX on _i174.GetIt {
         errorInterceptor: gh<_i299.ErrorInterceptor>(),
       ),
     );
+    gh.lazySingleton<_i392.FruitRemoteDataSource>(
+      () => _i392.FruitRemoteDataSourceImpl(gh<_i393.DioClient>()),
+    );
     gh.factory<_i731.UserBloc>(() => _i731.UserBloc(gh<_i813.UserService>()));
     gh.lazySingleton<_i56.RecipeRemoteDataSource>(
       () => _i56.RecipeRemoteDataSourceImpl(gh<_i393.DioClient>()),
     );
     gh.lazySingleton<_i902.CategoryRemoteDataSource>(
       () => _i902.CategoryRemoteDataSourceImpl(gh<_i393.DioClient>()),
+    );
+    gh.lazySingleton<_i874.FruitRepository>(
+      () => _i618.FruitRepositoryImpl(gh<_i392.FruitRemoteDataSource>()),
     );
     gh.lazySingleton<_i236.CategoryRepository>(
       () => _i106.CategoryRepositoryImpl(gh<_i902.CategoryRemoteDataSource>()),
@@ -79,8 +95,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i953.SearchRecipesUseCase>(),
       ),
     );
+    gh.lazySingleton<_i698.GetAllFruitsUseCase>(
+      () => _i698.GetAllFruitsUseCase(gh<_i874.FruitRepository>()),
+    );
     gh.lazySingleton<_i807.GetCategoriesUseCase>(
       () => _i807.GetCategoriesUseCase(gh<_i236.CategoryRepository>()),
+    );
+    gh.factory<_i143.NutritionTrackerCubit>(
+      () => _i143.NutritionTrackerCubit(gh<_i698.GetAllFruitsUseCase>()),
     );
     gh.factory<_i479.CategoryBloc>(
       () => _i479.CategoryBloc(gh<_i807.GetCategoriesUseCase>()),

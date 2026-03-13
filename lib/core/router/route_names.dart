@@ -14,6 +14,12 @@ abstract final class RouteNames {
   /// Path for the search screen.
   static const String search = '/search';
 
+  /// Path for the daily nutrition requirements page.
+  static const String dailyNutrition = '/daily-nutrition';
+
+  /// Path for the shopping cart page.
+  static const String cart = '/cart';
+
   /// Path for the recipe detail screen. Requires [recipeId] path parameter.
   static const String recipeDetail = '/recipe/:id';
 
@@ -23,6 +29,12 @@ abstract final class RouteNames {
 
   /// Named route identifier for the search screen.
   static const String searchName = 'search';
+
+  /// Named route identifier for the daily nutrition requirements page.
+  static const String dailyNutritionName = 'dailyNutrition';
+
+  /// Named route identifier for the cart page.
+  static const String cartName = 'cart';
 
   /// Named route identifier for the recipe detail screen.
   static const String recipeDetailName = 'recipeDetail';
